@@ -120,11 +120,11 @@ class Search
     end
 
     if @query[:year]
-      items = items.where 'year(taken) in (?)', @query[:year].map(&:to_i)
+      items = items.where "strftime('%Y', taken) in (?)", @query[:year]
     end
 
     if @query[:month]
-      items = items.where 'month(taken) in (?)', @query[:month].map(&:to_i)
+      items = items.where "strftime('%m', taken) in (?)", @query[:month]
     end
 
     if @query[:age]

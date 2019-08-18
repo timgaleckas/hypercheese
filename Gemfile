@@ -18,10 +18,6 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
-group :production do
-  gem 'mysql2'
-end
-
 group :development do
   gem 'thin'
   gem 'pry'
@@ -36,7 +32,7 @@ gem 'active_model_serializers'
 gem 'haml-rails'
 
 gem 'devise'
-gem 'omniauth', '=1.4.2'
+gem 'omniauth'
 gem 'omniauth-facebook'
 
 gem 'sucker_punch'
