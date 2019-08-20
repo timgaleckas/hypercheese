@@ -50,11 +50,11 @@ class UpdateActivityJob < ActiveJob::Base
     events += Bullhorn.includes(:item, :user).where('created_at > ?', cutoff).to_a
 
     recent = Item.includes(:item_paths).where('deleted = 0').where('created_at > ?', cutoff)
-    delete_tag = Tag.where( label: 'delete' ).first
+    delete_tag = Tag.deleted
     if delete_tag
       recent = recent.where [ 'id not in ( select item_id from item_tags where tag_id = ?)', delete_tag.id ]
     end
-    hidden_tag = Tag.where( label: 'Hidden' ).first
+    hidden_tag = Tag.hidden
     if hidden_tag
       recent = recent.where [ 'id not in ( select item_id from item_tags where tag_id = ?)', hidden_tag.id ]
     end

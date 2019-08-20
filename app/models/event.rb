@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
 
   # Get the most representative images in the set in a deterministic manner
   def best_items count
-    tags = [Tag.find_by_label('Hidden'), Tag.find_by_label('delete')].map {|t| t.id}
+    tags = [Tag.hidden, Tag.deleted].map {|t| t.id}
     pool = self.items.where('id not in ( select item_id from item_tags where tag_id in (?) )', tags).to_a
     return [] if pool.empty?
     res = []

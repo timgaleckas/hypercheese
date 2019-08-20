@@ -8,4 +8,16 @@ class Tag < ActiveRecord::Base
     return nil unless self.parent_tag_id
     Tag.find self.parent_tag_id rescue nil
   end
+
+  def self.find_by_label(label)
+    where('lower(label) = ?', label.downcase).first
+  end
+
+  def self.hidden
+    find_by_label('Hidden')
+  end
+
+  def self.deleted
+    find_by_label('delete')
+  end
 end

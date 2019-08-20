@@ -37,13 +37,13 @@ class Search
       items = items.where variety: @query[:type].to_s
     end
 
-    hidden_tag = Tag.where( label: 'Hidden' ).first
+    hidden_tag = Tag.hidden
     if hidden_tag
       items = items.where [ 'id not in ( select item_id from item_tags where tag_id = ?)', hidden_tag.id ]
     end
 
     tag_ids = (@query[:tags] || []).map(&:to_i)
-    delete_tag = Tag.where( label: 'delete' ).first
+    delete_tag = Tag.deleted
     if delete_tag && !tag_ids.member?( delete_tag.id )
       items = items.where [ 'id not in ( select item_id from item_tags where tag_id = ?)', delete_tag.id ]
     end
@@ -124,7 +124,7 @@ class Search
     end
 
     if @query[:month]
-      items = items.where "strftime('%m', taken) in (?)", @query[:month]
+      items = items.where "CAST(strftime('%m', taken) AS decimal) in (?)", @query[:month]
     end
 
     if @query[:age]
