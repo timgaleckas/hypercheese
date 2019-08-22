@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
       str = ids.join ','
       search_key = Digest::MD5.hexdigest str
       dir = Rails.root.join('tmp/searches')
-      Dir.mkdir dir unless File.exists? path
+      FileUtils.mkdir_p dir unless File.exists? path
       path = "#{dir}/#{search_key}"
       temp = path + ".#$$.tmp"
       File.binwrite temp, str

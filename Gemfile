@@ -21,16 +21,20 @@ end
 group :development do
   gem 'thin'
   gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-rescue'
   gem 'rb-readline'
   gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 gem 'mini_magick'
 gem 'exifr'
 gem 'zipline'
-gem 'active_model_serializers'
 gem 'haml-rails'
 
+gem 'active_model_serializers'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
