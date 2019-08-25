@@ -338,6 +338,7 @@ module Import
   end
 
   def self.generate_video_stream item
+    return if ENV['SKIP_STREAM']
     path = item.full_path
 
     dest = item.video_stream_path
